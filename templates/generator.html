@@ -28,7 +28,7 @@
         document.getElementById('output').style.visibility='visible'
         document.getElementById('bigResult').style.visibility='visible'
         document.getElementById('output').src = "/output/name=" + name + "/transformations=" + transformations + "/weights=" + weights + "/size=" + size + "/color=" + color + "/number=" + number;
-
+        document.getElementById('status').innerHTML = 'Loading...'
       }
       </script>
     <style>
@@ -60,8 +60,8 @@
         <div class="col-md-10">
           <h1 class="text-center">IFS Fractal Generator</h1>
           <p>Name your fractal:</p>
-          <input id='name' placeholder="MyFractal" style="width:100%"></input><br><br>
-          <p>Enter transformations as <a>numpy arrays</a> below or use the <a>predefined funtions</a> on separatelines:</p>
+          <input id='name' placeholder="MyFractal" style="width:100%" label="Name your Fractal:"></input><br><br>
+          <p>Enter transformations as <a>numpy arrays</a> below or use the <a>predefined funtions</a> on separate lines:</p>
           <textarea id='transformations' style="width:100%; height:150px; min-height:3em">&gt;Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)&#10;&gt;Scale(1/2)&#10;&gt;Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)&#10;&gt;Rotate(-np.pi/6) @ Scale(1/2)&#10;&gt;Rotate(np.pi/6) @ Scale(1/2)
           </textarea><br><br>
            <p>Enter the weights for the transformations as a comma separated list (default is an even distribution):</p>
@@ -73,14 +73,11 @@
             <p>Enter the number of points to be ploted:</p>
             <input id='number' placeholder="100_000_000" style="width:100%"></input><br><br>
             <button type="button" onclick="getFractal()">Get Fractal!</button><br><bR><br><br>
+            <p id="status"></p>
+            <iframe id="output" src="" style="width:100%; height:500px; margin-bottom:40px; border:0px; visibility:hidden"></iframe>
+            <button id="bigResult" type="button" style="visibility:hidden; margin-bottom:40px;" onclick="window.open(document.getElementById('output').src)">Open result in New Window</button>
         </div>
         <div class="col-md-1">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <iframe id="output" src="" style="width:100%; height:500px; margin-bottom:40px; border:2px black solid;visibility:hidden"></iframe>
-          <button id="bigResult" type="button" style="visibility:hidden; margin-bottome:40px;" onclick="window.open(document.getElementById('output').src)">Open result in New Window</button>
         </div>
       </div>
     </div>

@@ -2,11 +2,6 @@
 <html lang="en">
   <head>
     <link href={{ url_for('static', filename='favicon.ico') }} rel="icon" type="image/x-icon">
-    <!-- <link rel="apple-touch-icon" sizes="57x57" href={{ url_for('static', filename='apple-icon-57x57.png') }} />
-    <link rel="apple-touch-icon" sizes="72x72" href={{ url_for('static', filename='apple-icon-72x72.png') }} />
-    <link rel="apple-touch-icon" sizes="114x114" href={{ url_for('static', filename='apple-icon-114x114.png') }} />
-    <link rel="apple-touch-icon" sizes="144x144" href={{ url_for('static', filename='apple-icon-144x144.png') }} />
-    <link rel="apple-touch-icon" sizes="150x150" href={{ url_for('static', filename='apple-icon-150x150.png') }} /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -15,15 +10,20 @@
     <title>
       IFS-Fractal-Generator
     </title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <style>
+      body {
+        background-color: #283F28;
+      }
 
       * {
-        font-family: sans-serif;
+        font-family: 'Ubuntu', sans-serif;
         font-size: 16pt;
+        color: #C6D1AB;
       }
 
       h1 {
-        font-size: 35pt;
+        font-size: 65pt;
       }
       h2 {
         font-size: 30pt;
@@ -36,24 +36,56 @@
 
       .launch-generator {
         border: 1px solid black;
+        background-color: #C95546;
+        transition: 0.3s;
+      }
+
+      .launch-generator:hover {
+        background-color: #CC3D2A;
+        transition: 0.3s;
+
+      }
+
+      a {
+        color: #C95546;
+        transition: 0.3s;
+      }
+
+      a:hover {
+        color: #CC3D2A;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+
+      .margin {
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+
+      .hl {
+        color: #FFD25A;
       }
 
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid margin">
       <div class="row">
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
-          <div class="jumbotron hide-overflow" style="margin-top:10px;">
-            <h1 class="text-center">IFS Fractal Generator</h1>
-          </div>
-          <p class="text-center">Click a button.</p>
-          <button type="button" class="btn launch-generator center-block"
+          <h1 class="text-center">IFS Fractal Generator</h1>
+          <p class="text-center margin">Make a cool-looking thing.</p>
+          <button type="button" class="btn launch-generator center-block margin"
                   onclick="location.href='/generator';">
-            <h2 class="text-center" id="launch">Launch Generator</h2>
+            <h2 class="text-center">Launch Generator</h2>
           </button>
+          <h2 class="hl">About</h2>
+          <p>This Iterated Funtion System Fractal calculator uses Python on a
+             Heroku server. You might want to have more control over waht you
+             are doing: take a look at the <a href="https://github.com/francisp336/IFS-Fractal-Generator">GitHub Repository</a>
+             or just download the latest version of <a href="https://raw.githubusercontent.com/francisp336/IFS-Fractal-Generator/master/IFSFGL.py" download>IFSFGL.py</a>,
+             the generator, and yes: you have to read the <a href="https://github.com/francisp336/IFS-Fractal-Generator/blob/master/README.md">README.md</a>.</p>
         </div>
         <div class="col-md-1">
         </div>
