@@ -5,12 +5,6 @@ Contact: [franpe02@gettysburg.edu](mailto:franpe02@gettysburg.edu)
 
 This IFS generator is completelty open source. Get the backend library [here](https://share.cocalc.com/share/f6aee960-eb32-4259-a1ff-cddafc5864a0/New%20Projects%20and%20Problems/IFS%20Fractal%20Generator/IFSFGL.py?viewer=share).
 
-**Navigation**
-<ul>
-<li ><a href="Examples.ipynb?viewer=share">Examples</a></li>
-<li><a href="In%20Progress.ipynb?viewer=share">In Progress</a></li>
-</ul>
-
 ***
 
 The fractal approximations that can be generated here are fixed points of <u>contraction mappings</u>, more specifically, sets of affine linear transformations $T:\mathbb{R}^2\to\mathbb{R}^2$, each of the form $T(\vec{x})=A\vec{x}+\vec{b}$, where $A$ is a $2\times2$ matrix and $\vec{x}$ and $\vec{b}$ are vectors in $\mathbb{R}^2$. Each transformation from $\mathbb{R}^2(\cong\mathbb{R}^2\times\{1\})$ to itself can be represented as a block $3\times 3$ matrix, in the form $$\begin{bmatrix}A& \vec{b}\\0 & 1\end{bmatrix}.$$ The composition of transformations corresponds to the multiplication of these block matrices.
