@@ -1,2 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link href={{ url_for('static', filename='favicon.ico') }} rel="icon" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href={{ url_for('static', filename='apple-icon-57x57.png') }} />
+    <link rel="apple-touch-icon" sizes="72x72" href={{ url_for('static', filename='apple-icon-72x72.png') }} />
+    <link rel="apple-touch-icon" sizes="114x114" href={{ url_for('static', filename='apple-icon-114x114.png') }} />
+    <link rel="apple-touch-icon" sizes="144x144" href={{ url_for('static', filename='apple-icon-144x144.png') }} />
+    <link rel="apple-touch-icon" sizes="150x150" href={{ url_for('static', filename='apple-icon-150x150.png') }} /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <title>
+      IFS-Fractal-Generator
+    </title>
+    <script>
+      function getFractal(){
+        var name = document.getElementById('name').value;
+        var transformations = document.getElementById('transformations').value.replace(/\s/g, '').replace(/@/g, '&').replace(/\//g, 'FS');
+        var weights = document.getElementById('weights').value;
+        var size = document.getElementById('size').value;
+        var color = document.getElementById('color').value;
 
-<img src={{ url_for('static', filename='Trash.png') }} width="500px" />
+        var number = document.getElementById('number').value.replace(/_/g, '');
+
+        document.getElementById('output').style.visibility='visible'
+        document.getElementById('bigResult').style.visibility='visible'
+        document.getElementById('output').src = "/output/name=" + name + "/transformations=" + transformations + "/weights=" + weights + "/size=" + size + "/color=" + color + "/number=" + number;
+
+      }
+      </script>
+    <style>
+
+      * {
+        font-family: sans-serif;
+        font-size: 12pt;
+      }
+
+      h1 {
+        font-size: 35pt;
+      }
+      h2 {
+        font-size: 30pt;
+        margin: 15px 0px 15px;
+      }
+
+      .hide-overflow{
+        overflow: hidden;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <h1 class="text-center">IFS Fractal Generator</h1>
+          <p>Name your fractal:</p>
+          <input id='name' placeholder="MyFractal" style="width:100%"></input><br><br>
+          <p>Enter transformations as <a>numpy arrays</a> below or use the <a>predefined funtions</a> on separatelines:</p>
+          <textarea id='transformations' style="width:100%; height:150px; min-height:3em">&gt;Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)&#10;&gt;Scale(1/2)&#10;&gt;Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)&#10;&gt;Rotate(-np.pi/6) @ Scale(1/2)&#10;&gt;Rotate(np.pi/6) @ Scale(1/2)
+          </textarea><br><br>
+           <p>Enter the weights for the transformations as a comma separated list (default is an even distribution):</p>
+           <input id='weights' placeholder="0.6, 0.3, 0.1" style="width:100%"></input><Br><br>
+            <p>Enter the desired size of the fractal (default is 10):</p>
+            <input id='size' placeholder="10" style="width:100%"></input><br><br>
+            <p>Enter the desired color of the fractal as an (R, G, B) tuple, where R, G, and B are integers in [0,255] (default is blue):</p>
+            <input id='color' placeholder="(0, 0, 255)" style="width:100%"></input><br><br>
+            <p>Enter the number of points to be ploted:</p>
+            <input id='number' placeholder="100_000_000" style="width:100%"></input><br><br>
+            <button type="button" onclick="getFractal()">Get Fractal!</button><br><bR><br><br>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <iframe id="output" src="" style="width:100%; height:500px; margin-bottom:40px; border:2px black solid;visibility:hidden"></iframe>
+          <button id="bigResult" type="button" style="visibility:hidden; margin-bottome:40px;" onclick="window.open(document.getElementById('output').src)">Open result in New Window</button>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+
+</html>

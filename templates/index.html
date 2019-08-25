@@ -16,10 +16,9 @@
       IFS-Fractal-Generator
     </title>
     <style>
-      @import url('https://fonts.googleapis.com/css?family=Puritan&display=swap');
 
       * {
-        font-family: 'Puritan', sans-serif;
+        font-family: sans-serif;
         font-size: 16pt;
       }
 
@@ -35,51 +34,9 @@
         overflow: hidden;
       }
 
-      .launch-game {
+      .launch-generator {
         border: 1px solid black;
       }
-
-      .launch-game:hover {
-        background-color: black;
-      }
-      .launch-game:hover > #launch{
-        color: white;
-      }
-
-
-      /* For the Footer */
-
-      #footer {
-        background-color:rgb(244,243,243);
-        padding-top:20px;
-      }
-
-      #footer ul {
-          list-style-type: none;
-          padding-left: 0;
-          line-height: 1.7;
-      }
-
-      #footer h5 {
-          font-size: 18px;
-          font-weight: bold;
-          margin-top: 30px;
-          color:black;
-      }
-
-      #footer a {
-          line-height: 14px;
-          text-decoration: none;
-          color: black;
-          font-size: 12px;
-      }
-
-      #footer a:hover,
-      #footer a:focus {
-          font-weight: bold;
-          text-decoration: none;
-      }
-
 
     </style>
   </head>
@@ -90,131 +47,13 @@
         </div>
         <div class="col-md-10">
           <div class="jumbotron hide-overflow" style="margin-top:10px;">
-            <h1 class="text-center">Play Quadegories!</h1>
+            <h1 class="text-center">IFS Fractal Generator</h1>
           </div>
-          <p class="text-center">Quadegories is an extremely challenging,
-             clue-based trivia game that works the brain's executive funtion.
-             The most successful players are able to make obscure connections
-             between seemingly disparate things.</p>
-          <button type="button" class="btn launch-game center-block"
-                  onclick="location.href='/choose-collection';">
-            <h2 class="text-center" id="launch">Launch Game</h2>
+          <p class="text-center">Click a button.</p>
+          <button type="button" class="btn launch-generator center-block"
+                  onclick="location.href='/generator';">
+            <h2 class="text-center" id="launch">Launch Generator</h2>
           </button>
-          <br/>
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion"
-                     href="#collapse1">
-                  How Quadegories Works</a>
-                </h4>
-              </div>
-              <div id="collapse1" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    The goal is to guess the 'common denominator' in a list of
-                    four items.<br/><br/>
-
-                    For example, for clues,
-                    <ol reversed>
-                      <li> Nautilus
-                      <li> Cockle
-                      <li> Cawrie
-                      <li> Conch
-                    </ol>
-
-                    the Quadegory is <strong>Shells</strong>.<br/><br/>
-
-                    Each Quadegory comes with an interesting fact!
-                  </p>
-                  </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion"
-                     href="#collapse2">
-                  Suggested Game Play</a>
-                </h4>
-              </div>
-              <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>
-                  <strong><u>To Play with a Group:</u></strong> Construct teams
-                  or play individually. One player can be designated as the
-                  reader or the players can rotate serving as reader each round.
-                  At the beginning of each round the reader gets a new set of
-                  four clues, and reads each, one at a time. Between clues the
-                  reader counts to 5 on their hand.<br/><br/>
-
-                  At any time during each round, players still in the game
-                  may make ONE attempt at the correct answer. A player
-                  receives the number of points corresponding to the clue
-                  that is given directly before the correct guess. An
-                  incorrect answer results in zero points and elimination
-                  from the round. The round continues until one player either
-                  guesses correctly (winning points) or is eliminated from that
-                  round by providing an incorrect answer <br/><br/>
-
-                  To any guess there are only three possible responses the
-                  reader can give: CORRECT, INCORRECT or BE MORE SPECIFIC.
-                  In the latter event, the player will be provided a
-                  (one time only) additional five seconds to improve the
-                  accuracy of the answer and either win the Quadegory or be
-                  eliminated from that round.<br/><br/>
-
-                  The game can end after a designated time or point total has
-                  been reached.<br/><br/>
-
-                  <strong><u>To Play Alone:</u></strong> Read the clues and
-                  whenever you are ready to guess, take a peak at the Quadegory!
-                  <br/><br/>
-
-                  <strong><u>To Play Scoreless:</u></strong> Have fun reading
-                  the clues and pay no mind to the time between each or who
-                  answers first--just have fun!
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion"
-                     href="#collapse3">
-                  Why should I play Quadegories?</a>
-                </h4>
-              </div>
-              <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>
-                    Quadegories exercises the brain’s <i>executive function</i>
-                    making it a valuable learning tool for teenagers and adults.
-
-                    Executive function allows us to:
-                    <ul>
-                      <li>Make plans</li>
-                      <li>Stay on task</li>
-                      <li>Keep track of more than one thing at once</li>
-                      <li>Reference past knowledge</li>
-                      <li>Evaluate ideas</li>
-                      <li>Change our minds</li>
-                      <li>Finish work on time</li>
-                    </ul>
-
-                    Find yourself forgetful? Absent minded? Unable to make the
-                    kinds of connections you’d easily make before?<br/><br/>
-
-                    <center><strong>You need Quadegories!</strong></center><br/>
-
-                    It’s like going to the gym for your brain!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="col-md-1">
         </div>
@@ -224,7 +63,7 @@
       <br>
 
     </div>
-    <div class="container-fluid" id="footer">
+    <!-- <div class="container-fluid" id="footer">
       <div class="row">
         <div class="col-sm-2">
         </div>
@@ -260,6 +99,6 @@
           <p class="text-center" style="font-size:10px">&copy; 2019</p>
         </div>
       </div>
-    </div>
+    </div>-->
   </body>
 </html>

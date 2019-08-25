@@ -33,17 +33,26 @@ from scipy.stats import linregress                      # for linear regressions
 def opNorm(A):
     G = A[:2].T[:2].T
     return np.sqrt(np.max(np.linalg.eig(G @ G.T)[0]))
-def check_transformations(transformations):
+def check_transformations(transformations, mode=''):
     failed = []
     for i in np.arange(len(transformations)):
         if opNorm(transformations[i]) >= 1:
             failed = failed + [i+1]
     if len(failed) == 0:
-        print(colored('The opNorm of every transformation is less than 1 so all of the transformations are contraction mappings.','green'))
+        if mode == 'pretty':
+            print(colored('The opNorm of every transformation is less than 1 so all of the transformations are contraction mappings.','green'))
+        else:
+            return 'The opNorm of every transformation is less than 1 so all of the transformations are contraction mappings.'
     elif len(failed) == 1:
-        print(colored(f'The opNorm of transformation {failed[0]} is greater than or equal to 1 so is not a contraction mapping.','red'))
+        if mode == 'pretty':
+            print(colored(f'The opNorm of transformation {failed[0]} is greater than or equal to 1 so is not a contraction mapping.','red'))
+        else:
+            return f'The opNorm of transformation {failed[0]} is greater than or equal to 1 so is not a contraction mapping.'
     elif len(failed) > 1:
-        print(colored(f'The opNorm of transformations {failed} are greater than or equal to 1 so are not contraction mappings.','red'))
+        if mode == 'pretty':
+            print(colored(f'The opNorm of transformations {failed} are greater than or equal to 1 so are not contraction mappings.','red'))
+        else:
+            return f'The opNorm of transformations {failed} are greater than or equal to 1 so are not contraction mappings.'
 
 @njit
 def choose_random_index(weights):
@@ -130,7 +139,12 @@ class Fractal(object):
         if all(weights == np.array([0.])):
             self.weights = np.array([1/len(transformations)]*len(transformations))
         else:
+            if len(weights) != len(transformations):
+                raise ValueError('Weights do not match the transformations.')
+            if sum(weights) != 1:
+                raise ValueError('Weights do not sum to 1.')
             self.weights = weights
+
 
         self.size = size
         self.xmin, self.xmax, self.ymin, self.ymax = find_bounds(self.transformations,self.weights)
@@ -230,7 +244,7 @@ class Fractal(object):
                     self.pixels[self._scale(row)] = self.color
             self.developement += n
 
-    def save_pic(self, path='static/Trash.png'):
+    def save_pic(self, path='Saved%20Fractals/Trash.png'):
         self.pic.save(path)
 
     def display_pic(self):

@@ -50,7 +50,9 @@ Create a list of the transformations.
 
 Use `check_transformations(transformations)` with `transformations` the list of transformations to verify that each of the transformations in the list is in fact a contraction mapping.
 
-> `check_transformations(T)`
+> `check_transformations(T, mode)`
+
+If `mode` is set to `'pretty'`, will print the response in colors
 
 ### I. Creating a Fractal Image
 

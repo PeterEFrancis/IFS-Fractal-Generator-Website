@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <title>
+      IFS-Fractal-Generator
+    </title>
+    <style>
+
+      * {
+        font-family: monospace;
+        font-size: 12pt;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Interpreted Input:</h4>
+          <strong>Name:</strong> {{ name }}<br>
+          <strong>Transformations:</strong><br>
+            <p style="padding-left:20px;">
+            {% for rule in transformations %}
+            > {{ rule }} <br>
+            {% endfor %}
+            </p>
+          <strong>Weights:</strong> {{ weights }}<br>
+          <strong>Size:</strong> {{ size }}<br>
+          <strong>Color:</strong> {{ color }}<br>
+          <strong>Number:</strong> {{ number }}<br>
+          <br><br>
+          <h4>Output:</h4>
+          <p style="color:red">{{ error }}</p>
+          <br>
+          {{ opnormMSG }}
+          <img id="imageoutput" style="margin:20px; border:1px solid black; padding:10px;" src= {{ URL }}/><bR>
+          <a href={{ URL }} download>Download</a>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+
+</html>

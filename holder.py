@@ -1,0 +1,5 @@
+>Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)
+>Scale(1/2)
+>Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)
+>Rotate(-np.pi/6) @ Scale(1/2)
+>Rotate(np.pi/6) @ Scale(1/2)
