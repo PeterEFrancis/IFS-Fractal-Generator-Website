@@ -15,7 +15,7 @@ app = Flask(__name__)
 def master():
     pictureDictionary = {}
     for file in os.listdir('static'):
-        if os.fsdecode(file).endswith('.png'):
+        if os.fsdecode(file).endswith('fractal.png'):
             pictureDictionary[os.fsdecode(file)[:-4]] = url_for('static', filename=os.fsdecode(file))
     return render_template('master.html', pictureDictionary=pictureDictionary)
 
@@ -38,7 +38,7 @@ def output(name, transformations, weights, size, color, number):
             raise ValueError('Web_Generator in output(): Name cannot be NoneType.')
         else:
             name = name.replace(' ', '') + '_' + str(int(time.time()))
-
+            
         # Check transformations
         if transformations == 'None': # leave error message for IFSFGL
             transformations = None
@@ -69,7 +69,7 @@ def output(name, transformations, weights, size, color, number):
 
         myFractal = Fractal(transformations, weights=weights, size=size, color=color)
         myFractal.add_points(number)
-        myFractal.save_pic(f'static/{name}.png')
+        myFractal.save_pic(f'static/saved_fractals/{name}_fractal.png')
 
         length=len(weights)
 
@@ -78,26 +78,6 @@ def output(name, transformations, weights, size, color, number):
         return render_template('error.html', error=error)
 
     return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename=name + '.png'), opNormMess=opNormMess, length=length)
-
-
-
-
-@app.route('/crab_example')
-def crab():
-    C1 = Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)
-    C2 = Scale(1/2)
-    C3 = Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)
-    C4 = Rotate(-np.pi/6) @ Scale(1/2)
-    C5 = Rotate(np.pi/6) @ Scale(1/2)
-
-    CT = [C1, C2, C3, C4, C5]
-
-    crab = Fractal(CT, size=20)
-
-    crab.add_points(1_000_000)
-    crab.save_pic(path='static/Crab.png')
-
-    return render_template('generator.html', URL=url_for('static', filename='Crab.png'))
 
 
 
