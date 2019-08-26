@@ -26,7 +26,7 @@
   <body>
     {% for name in pictureDictionary %}
     <p>{{ name }} <a href={{ pictureDictionary[name] }} download>Download</a></p><Br>
-    <p>Created: {{ name[:-10] }}</p><br>
+    <p>Created: {{ name[-10:] }}</p><br>
     <img src={{ pictureDictionary[name] }}/><br><br>
     {% endfor %}
     <hl>
