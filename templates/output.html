@@ -3,6 +3,7 @@
   <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
+
     <title>
       IFS-Fractal-Generator
     </title>
@@ -13,29 +14,50 @@
         font-size: 12pt;
       }
 
+      table, tr, td {
+        border:1px solid black;
+      }
+      td {
+        padding: 10px;
+      }
+
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h4>Interpreted Input:</h4>
+          <h3>Input</h3>
           <strong>Name:</strong> {{ name }}<br>
-          <strong>Transformations:</strong><br>
+          <strong>Transformations and weights:</strong><br>
             <p style="padding-left:20px;">
-            {% for rule in transformations %}
-            > {{ rule }} <br>
-            {% endfor %}
+              <table>
+                <tr>
+                  <td>Transformation</td><td>Weight</td>
+                </tr>
+                {% for i in range(length) %}
+                <tr>
+                  <td>
+                    {% for row in transformations[i] %}
+                    {{ row }} <br>
+                    {% endfor %}
+                  </td>
+                  <td>
+                    <p class="text-center">{{ weights[i] }}</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
             </p>
-          <strong>Weights:</strong> {{ weights }}<br>
+          <!-- <strong>Weights:</strong> {{ weights }}<br> -->
           <strong>Size:</strong> {{ size }}<br>
           <strong>Color:</strong> {{ color }}<br>
           <strong>Number:</strong> {{ number }}<br>
           <br><br>
-          <h4>Output:</h4>
+          <h3>Output</h3>
           <p style="color:red">{{ error }}</p>
           <br>
-          {{ opnormMSG }}<br>
+          {{ opNormMess }}<br>
           <img id="imageoutput" style="margin:20px; border:1px solid black; padding:10px;" src= {{ URL }}/><bR>
           <a href={{ URL }} download>Download</a>
         </div>

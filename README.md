@@ -25,7 +25,7 @@ Difine some contraction transformations as $3\times 3$ matrices (as numpy arrays
 * `ScaleY(s)` : $(x,y)\to(x,sy)$
 * `ScaleXY(s,t)` : $(x,y)\to(sx,ty)$
 
-Remember, the order that when composed, the transformations will be applied is from right to left
+Remember, the order that when composed, the transformations will be applied from right to left
 
 > `T1 = np.array([[0.7, 0., 0.15], [0., 0.7, 0.3],[0., 0., 1.]])`<br>
 > `T2 = Translate(0.35,0) @ Rotate(np.pi/4) @ Scale(0.35*np.sqrt(2))`<br>
@@ -39,7 +39,7 @@ Use `check_transformations(transformations)` with `transformations` the list of 
 
 > `check_transformations(T, mode)`
 
-If `mode` is set to `'pretty'`, will print the response in colors
+If `mode` is set to `'pretty'`, will print the response in colors and if set to `'quiet'`, will return a boolean value, `True` or `False`
 
 ### I. Creating a Fractal Image
 
@@ -63,7 +63,7 @@ Optionally, define a 'weights' numpy array with the elements corresponding to th
 
 ##### 1. Using the `Fractal` class
 
-Create an instance of the `Fractal` class for the list of transformations, and optionally the `weights`, `size`, and `color`. The default is for evenly distributed weights, `size = 5` and `color='blue'`.
+Create an instance of the `Fractal` class for the list of transformations, and optionally the `weights`, `size`, and `color`. The default is for evenly distributed weights, `size = 10` and `color='blue'`.
 > `leafFractal = Fractal(T, weights=WT, size=10, color='green')`
 
 To add points to the fractal image, impliment `add_points(n)` with the `n` the number of points to be added. This does not save point coordinates once they have been plotted onto the image. (See **2. Pre-Plotting Calculation** for a method to save point coordinates).

@@ -33,7 +33,10 @@ from scipy.stats import linregress                      # for linear regressions
 def opNorm(A):
     G = A[:2].T[:2].T
     return np.sqrt(np.max(np.linalg.eig(G @ G.T)[0]))
+
 def check_transformations(transformations, mode=''):
+    if transformations is None:
+        raise ValueError('IFSFGL: transformations cannot be NoneType.')
     failed = []
     for i in np.arange(len(transformations)):
         if opNorm(transformations[i]) >= 1:
@@ -41,16 +44,22 @@ def check_transformations(transformations, mode=''):
     if len(failed) == 0:
         if mode == 'pretty':
             print(colored('The opNorm of every transformation is less than 1 so all of the transformations are contraction mappings.','green'))
+        elif mode == 'quiet':
+            return True
         else:
             return 'The opNorm of every transformation is less than 1 so all of the transformations are contraction mappings.'
     elif len(failed) == 1:
         if mode == 'pretty':
             print(colored(f'The opNorm of transformation {failed[0]} is greater than or equal to 1 so is not a contraction mapping.','red'))
+        elif mode == 'quiet':
+            return False
         else:
             return f'The opNorm of transformation {failed[0]} is greater than or equal to 1 so is not a contraction mapping.'
     elif len(failed) > 1:
         if mode == 'pretty':
             print(colored(f'The opNorm of transformations {failed} are greater than or equal to 1 so are not contraction mappings.','red'))
+        elif mode == 'quiet':
+            return False
         else:
             return f'The opNorm of transformations {failed} are greater than or equal to 1 so are not contraction mappings.'
 
@@ -133,24 +142,27 @@ def generate_figures(n, figures, transformations):                       # takes
 
 ## the Fractal class
 class Fractal(object):
-    def __init__(self, transformations, weights=np.array([0.]), size=5, color=(0,0,255)):
+    def __init__(self, transformations, weights=np.array([0.]), size=10, color=(0,0,255)):
+        if transformations is None:
+            raise ValueError('IFSFGL: transformations cannot be NoneType.')
         self.transformations = transformations
         self.color = color
         if all(weights == np.array([0.])):
             self.weights = np.array([1/len(transformations)]*len(transformations))
         else:
             if len(weights) != len(transformations):
-                raise ValueError('Weights do not match the transformations.')
+                raise ValueError('IFSFGL: Weights do not match the transformations.')
             if sum(weights) != 1:
-                raise ValueError('Weights do not sum to 1.')
+                raise ValueError('IFSFGL: Weights do not sum to 1.')
             self.weights = weights
 
-
+        if size==0:
+            raise ValueError('IFSFGL: size cannot be 0.')
         self.size = size
         self.xmin, self.xmax, self.ymin, self.ymax = find_bounds(self.transformations,self.weights)
         self.bounds = (self.xmin, self.xmax, self.ymin, self.ymax)
-        if self.xmax-self.xmin==0 or self.ymax-self.ymin==0:
-            raise ValueError('Fractal converges to point.')
+        if self.xmax-self.xmin==0 or self.ymax-self.ymin==0 or not check_transformations(self.transformations, mode="quiet"):
+            raise ValueError('IFSFGL: Fractal converges to insignificance or absurdity.')
         self.width = math.ceil((self.xmax-self.xmin)*36*self.size)
         self.height = math.ceil((self.ymax-self.ymin)*36*self.size)
         self.isZoomed = False
@@ -341,7 +353,7 @@ def _generate_points_zoom(n, transformations, weights=np.array([0.]), startingPo
     if all(weights == np.array([0.])):
         return generate_points_zoom_simple(n, transformations, startingPoint, frame)
     if all(frame == np.array([0.])): # this is to keep the order of function inputs consistant
-        print('THERE WAS AN ERROR: _generate_points_zoom was not given a zoom frame.')
+        raise ValueError('IFSFGL: _generate_points_zoom was not given a zoom frame.')
     output = np.array([[startingPoint[0],startingPoint[1],1]]*n, dtype=np.float64)
     for _ in range(20):
         potentialPoint = transformations[choose_random_index(weights)] @ outputFigures[i-1]

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
     <title>
@@ -18,12 +20,29 @@
     <script>
       function getFractal(){
         var name = document.getElementById('name').value;
-        var transformations = document.getElementById('transformations').value.replace(/\s/g, '').replace(/@/g, '&').replace(/\//g, 'FS');
+        if (name === undefined || name == null || name.length <= 0) {
+          var name = 'None'
+        }
+        var transformations = document.getElementById('transformations').value.replace(/\n/g,'>').replace(/\s/g,'').replace(/@/g, '&').replace(/\//g, 'FS');
+        if (transformations === undefined || transformations == null || transformations.length <= 0) {
+          var transformations = 'None'
+        }
         var weights = document.getElementById('weights').value;
+        if (weights === undefined || weights == null || weights.length <= 0) {
+          var weights = 'None'
+        }
         var size = document.getElementById('size').value;
+        if (size === undefined || size == null || size.length <= 0) {
+          var size = 10 // taking care of this here? or in app.py
+        }
         var color = document.getElementById('color').value;
-
+        if (color === undefined || color == null || color.length <= 0) {
+          var color = 'None'
+        }
         var number = document.getElementById('number').value.replace(/_/g, '');
+        if (number === undefined || number == null || number.length <= 0) {
+          var number = 100000 // taking care of this here? or in app.py
+        }
 
         document.getElementById('output').style.visibility='visible'
         document.getElementById('bigResult').style.visibility='visible'
@@ -49,7 +68,11 @@
       .hide-overflow{
         overflow: hidden;
       }
-
+      label {
+        display: inline-block;
+        width: 140px;
+        text-align: right;
+      }​
     </style>
   </head>
   <body>
@@ -59,23 +82,27 @@
         </div>
         <div class="col-md-10">
           <h1 class="text-center">IFS Fractal Generator</h1>
-          <p>Name your fractal:</p>
+          <strong>Name your fractal:</strong>
           <input id='name' placeholder="MyFractal" style="width:100%" label="Name your Fractal:"></input><br><br>
-          <p>Enter transformations as <a>numpy arrays</a> below or use the <a>predefined funtions</a> on separate lines:</p>
-          <textarea id='transformations' style="width:100%; height:150px; min-height:3em">&gt;Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)&#10;&gt;Scale(1/2)&#10;&gt;Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)&#10;&gt;Rotate(-np.pi/6) @ Scale(1/2)&#10;&gt;Rotate(np.pi/6) @ Scale(1/2)
-          </textarea><br><br>
-           <p>Enter the weights for the transformations as a comma separated list (default is an even distribution):</p>
-           <input id='weights' placeholder="0.6, 0.3, 0.1" style="width:100%"></input><Br><br>
-            <p>Enter the desired size of the fractal (default is 10):</p>
+          <strong>Enter transformations as 3x3 <a href="#" data-toggle="modal" data-target="#myModal1">NumPy arrays</a> below or use the <a a href="#" data-toggle="modal" data-target="#myModal2">predefined funtions</a> on separate lines:</strong>
+          <textarea id='transformations' style="width:100%; height:150px; min-height:3em" placeholder="Translate(0.5,0.15) @ Rotate(np.pi/4) @ Scale(1/4)&#10;Scale(1/2)&#10;Translate(-.5,0.15) @ Rotate(-np.pi/4) @ Scale(1/4)&#10;Rotate(-np.pi/6) @ Scale(1/2)&#10;Rotate(np.pi/6) @ Scale(1/2)"></textarea><br><br>
+          <strong>Enter the weights for the transformations as a comma separated list (default is an even distribution):</strong>
+          <input id='weights' placeholder="0.2, 0.2, 0.2, 0.2, 0.2" style="width:100%"></input><Br><br>
+          <!-- <a data-toggle="collapse" data-target="#optional" href="#">Optional Specifications</a>
+          <div id="optional" class="collapse">
+            <br> -->
+            <strong>Enter the desired size of the fractal (default is 10):</strong>
             <input id='size' placeholder="10" style="width:100%"></input><br><br>
-            <p>Enter the desired color of the fractal as an (R, G, B) tuple, where R, G, and B are integers in [0,255] (default is blue):</p>
+            <strong>Enter the desired color of the fractal as an (R, G, B) tuple (default is blue):</strong>
             <input id='color' placeholder="(0, 0, 255)" style="width:100%"></input><br><br>
-            <p>Enter the number of points to be ploted:</p>
-            <input id='number' placeholder="100_000_000" style="width:100%"></input><br><br>
-            <button type="button" onclick="getFractal()">Get Fractal!</button><br><bR><br><br>
-            <p id="status"></p>
-            <iframe id="output" src="" style="width:100%; height:500px; margin-bottom:40px; border:0px; visibility:hidden"></iframe>
-            <button id="bigResult" type="button" style="visibility:hidden; margin-bottom:40px;" onclick="window.open(document.getElementById('output').src)">Open result in New Window</button>
+            <strong>Enter the number of points to be ploted (default is 100,000):</strong>
+            <input id='number' placeholder="100_000" style="width:100%"></input>
+          <!-- </div> -->
+          <br><br>
+          <button class="btn btn-default" type="button" onclick="getFractal()">Get Fractal</button><br><bR><br><br>
+          <p id="status"></p><br>
+          <iframe id="output" src="" style="width:100%; height:750px; margin-bottom:40px; border:0px; visibility:hidden"></iframe>
+          <button class="btn btn-default" id="bigResult" type="button" style="visibility:hidden; margin-bottom:40px;" onclick="window.open(document.getElementById('output').src)">Open result in New Window</button>
         </div>
         <div class="col-md-1">
         </div>
@@ -83,6 +110,66 @@
     </div>
 
 
-  </body>
 
+
+    <!-- Modal 1 -->
+    <div id="myModal1" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">About NumPy Arrays</h4>
+          </div>
+          <div class="modal-body">
+            <p>NumPy is a python package that allows us to do faster calculations with N-dimmensional arrays. For more information on the package, visit <a href="http://https://www.numpy.org/" target="_blank">Numpy.org</a>.</p><br>
+            <p>The format for a 3x3 NumPy array is as follows (by row):</p>
+            <span style="font-family:monospace">np.array([[a,b,c],[d,e,f],[0,0,1]])</span><br><br>
+            is the matrix,<br>
+            $$\begin{bmatrix}a & b & c \\ d & e & f \\ 0 & 0 & 1\end{bmatrix}.$$
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+        <!-- Modal 2 -->
+        <div id="myModal2" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Predefined Functions</h4>
+              </div>
+              <div class="modal-body">
+                The following are built-in transformations:
+                <ul>
+                  <li><span style="font-family:monospace">Scale(s)</span> $$(x,y)\to(sx,sy)$$  </li>
+                  <li><span style="font-family:monospace">Translate(h,k)</span> $$(x,y)\to(x+h,y+k)$$  </li>
+                  <li><span style="font-family:monospace">Rotate(theta)</span> $$(x,y)\to(x\cos\theta-y\sin\theta, x\sin\theta+y\cos\theta)$$</li>
+                  <li><span style="font-family:monospace">ShearX(t)</span> $$(x,y)\to(x+ty,y)$$</li>
+                  <li><span style="font-family:monospace">ShearY(t)</span> $$(x,y)\to(x,xt+y)$$</li>
+                  <li><span style="font-family:monospace">ScaleX(s)</span> $$(x,y)\to(sx,y)$$</li>
+                  <li><span style="font-family:monospace">ScaleY(s)</span> $$(x,y)\to(x,sy)$$</li>
+                  <li><span style="font-family:monospace">ScaleXY(s,t)</span> $$(x,y)\to(sx,ty)$$</li>
+                </ul>
+
+                These transformations define 3x3 NumPy arrays and so can be multiplied as matrices with the <span style="font-family:monospace">@</span> operator. Remember, the order that when composed, the transformations will be applied is from right to left
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+  </body>
 </html>

@@ -1,1 +1,13 @@
-{{ error }}
+<html>
+<head>
+  <script>
+    function loadError() {
+      document.getElementById('error').innerHTML = '{{ error }}'.replace(/\n/g,'<br>');
+    }
+  </script>
+</head>
+<body onload="loadError()">
+  <h1 style="color:red">That's an Error!</h1>
+  <p id="error" style="color:red"> </p>
+</body>
+</html>

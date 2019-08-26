@@ -10,7 +10,7 @@
     <title>
       IFS-Fractal-Generator
     </title>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400&display=swap" rel="stylesheet">
     <style>
       body {
         background-color: #283F28;
@@ -19,7 +19,7 @@
       * {
         font-family: 'Ubuntu', sans-serif;
         font-size: 16pt;
-        color: #C6D1AB;
+        color: #D5E0BE;
       }
 
       h1 {
@@ -63,7 +63,7 @@
       }
 
       .hl {
-        color: #FFD25A;
+        color: #FFDF89;
       }
 
     </style>
@@ -75,17 +75,26 @@
         </div>
         <div class="col-md-10">
           <h1 class="text-center">IFS Fractal Generator</h1>
-          <p class="text-center margin">Make a cool-looking thing.</p>
+          <h3 class="text-center margin hl"><em class="hl">Make a cool-looking thing.</em></h3>
           <button type="button" class="btn launch-generator center-block margin"
-                  onclick="location.href='/generator';">
+                  onclick="window.open('/generator');">
             <h2 class="text-center">Launch Generator</h2>
           </button>
-          <h2 class="hl">About</h2>
-          <p>This Iterated Funtion System Fractal calculator uses Python on a
-             Heroku server. You might want to have more control over waht you
+          <h2 class="hl">About the Generator</h2>
+          <p style="margin-bottom: 40px;">This Iterated Funtion System Fractal Generator was first
+            conceptualized during an undergraduate Linear Algebra couse while
+            writing Sage code to use matrices as affine linear transformations.
+            Now this generator is able to give the user a more direct way to
+            control the transformations that define their fractal. You can see a
+            sample output here: <a href="/output/name=crab/transformations=Translate(0.5,0.15)&Rotate(np.piFS4)&Scale(1FS4)%3EScale(1FS2)%3ETranslate(-.5,0.15)&Rotate(-np.piFS4)&Scale(1FS4)%3ERotate(-np.piFS6)&Scale(1FS2)%3ERotate(np.piFS6)&Scale(1FS2)/weights=.2,.2,.2,.2,.2/size=10/color=(0,0,255)/number=100000" target="_blank">The Crab</a>.
+          <h2 class="hl">About the Code</h2>
+          <p style="margin-bottom: 40px;">This Iterated Funtion System Fractal generator uses Python on a
+             Heroku server. You might want to have more control over what you
              are doing: take a look at the <a href="https://github.com/francisp336/IFS-Fractal-Generator">GitHub Repository</a>
              or just download the latest version of <a href="https://raw.githubusercontent.com/francisp336/IFS-Fractal-Generator/master/IFSFGL.py" download>IFSFGL.py</a>,
-             the generator, and yes: you have to read the <a href="https://github.com/francisp336/IFS-Fractal-Generator/blob/master/README.md">README.md</a>.</p>
+             the generator, and yes, you have to read the <a href="https://github.com/francisp336/IFS-Fractal-Generator/blob/master/README.md">README.md</a>.</p>
+             <h2 class="hl">About Me</h2>
+             <p>Please see <a href="http://peterfrancis.tk" targe="_blank">PeterFrancis.tk</a> for more information about me and ways to contact me.</p>
         </div>
         <div class="col-md-1">
         </div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+
+    <title>
+      IFS-Fractal-Generator
+    </title>
+    <style>
+
+      * {
+        font-family: monospace;
+        font-size: 12pt;
+      }
+
+      table, tr, td {
+        border:1px solid black;
+      }
+      td {
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    {% for name in pictureDictionary %}
+    <p>{{ name }} <a href={{ pictureDictionary[name] }} download>Download</a></p><Br>
+    <img src={{ pictureDictionary[name] }}/><br><br>
+    {% endfor %}
+  </body>
+
+</html>
