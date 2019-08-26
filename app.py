@@ -9,7 +9,8 @@ import sys
 
 app = Flask(__name__)
 
-
+if not os.path.exists("static/saved_fractals"):
+            os.makedirs("static/saved_fractals")
 
 @app.route('/master_list')
 def master():
@@ -69,8 +70,6 @@ def output(name, transformations, weights, size, color, number):
 
         myFractal = Fractal(transformations, weights=weights, size=size, color=color)
         myFractal.add_points(number)
-        if not os.path.exists("static/saved_fractals"):
-            os.makedirs("static/saved_fractals")
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
         length=len(weights)
