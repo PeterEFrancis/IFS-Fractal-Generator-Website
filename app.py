@@ -77,7 +77,7 @@ def output(name, transformations, weights, size, color, number):
         error = sys.exc_info()[1]
         return render_template('error.html', error=error)
 
-    return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename=name + '.png'), opNormMess=opNormMess, length=length)
+    return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename='saved_fractals' + name + '.png'), opNormMess=opNormMess, length=length)
 
 
 
