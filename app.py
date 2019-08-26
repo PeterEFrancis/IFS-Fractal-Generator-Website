@@ -10,7 +10,7 @@ import sys
 app = Flask(__name__)
 
 if not os.path.exists("static/saved_fractals"):
-            os.makedirs("static/saved_fractals")
+    os.makedirs("static/saved_fractals")
 
 @app.route('/master_list')
 def master():
