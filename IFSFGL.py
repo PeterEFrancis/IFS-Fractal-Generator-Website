@@ -6,7 +6,7 @@
 #
 
 
-# Load Etxternal packages
+# Load External packages
 import numpy as np                                      # for wicked fast arrays                                  MORE INFORMATION: https://docs.scipy.org/doc/
 from numpy import *                                     # for ease of math function use
 from numpy.linalg import *                              # for ease of linalg function use
