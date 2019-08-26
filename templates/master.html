@@ -3,7 +3,22 @@
   <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
+    <script>
+    function timeConverter(UNIX_timestamp){
+      var a = new Date(UNIX_timestamp * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+      var hour = a.getHours();
+      var min = a.getMinutes();
+      var sec = a.getSeconds();
+      var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+      return time;
+    }
 
+
+    </script>
     <title>
       IFS-Fractal-Generator
     </title>
@@ -25,11 +40,13 @@
   </head>
   <body>
     {% for name in pictureDictionary %}
-    <p>{{ name }} <a href={{ pictureDictionary[name] }} download>Download</a></p><Br>
-    <p>Created: {{ name[-10:] }}</p><br>
+    <p><strong>{{ name[:-11] }}</strong> <a href={{ pictureDictionary[name] }} download>Download</a><bR>
+      Created: <script>document.write(timeConverter({{ name[-10:] }}))</script></p><br>
     <img src={{ pictureDictionary[name] }}/><br><br>
+    <hr>
     {% endfor %}
-    <hl>
   </body>
+
+
 
 </html>
