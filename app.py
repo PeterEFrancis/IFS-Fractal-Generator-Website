@@ -15,7 +15,7 @@ app = Flask(__name__)
 def master():
     pictureDictionary = {}
     for file in os.listdir('static/saved_fractals'):
-        if os.fsdecode(file).endswith('fractal.png'):
+        if os.fsdecode(file).endswith('.png'):
             pictureDictionary[os.fsdecode(file)[:-4]] = url_for('static', filename=os.fsdecode(file))
     return render_template('master.html', pictureDictionary=pictureDictionary)
 
