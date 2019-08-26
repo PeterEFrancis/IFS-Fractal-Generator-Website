@@ -69,7 +69,7 @@ def output(name, transformations, weights, size, color, number):
 
         myFractal = Fractal(transformations, weights=weights, size=size, color=color)
         myFractal.add_points(number)
-        myFractal.save_pic(f'static/saved_fractals/{name}_fractal.png')
+        myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
         length=len(weights)
 
@@ -77,7 +77,7 @@ def output(name, transformations, weights, size, color, number):
         error = sys.exc_info()[1]
         return render_template('error.html', error=error)
 
-    return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename='saved_fractals' + name + '.png'), opNormMess=opNormMess, length=length)
+    return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename='saved_fractals/' + name + '.png'), opNormMess=opNormMess, length=length)
 
 
 
