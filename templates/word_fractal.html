@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link href={{ url_for('static', filename='favicon.ico') }} rel="icon" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href={{ url_for('static', filename='apple-icon-57x57.png') }} />
+    <link rel="apple-touch-icon" sizes="72x72" href={{ url_for('static', filename='apple-icon-72x72.png') }} />
+    <link rel="apple-touch-icon" sizes="114x114" href={{ url_for('static', filename='apple-icon-114x114.png') }} />
+    <link rel="apple-touch-icon" sizes="144x144" href={{ url_for('static', filename='apple-icon-144x144.png') }} />
+    <link rel="apple-touch-icon" sizes="150x150" href={{ url_for('static', filename='apple-icon-150x150.png') }} /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <title>
+      IFS-Fractal-Generator
+    </title>
+    <script>
+      function getFractal(){
+        var name = document.getElementById('name').value;
+        if (name === undefined || name == null || name.length <= 0) {
+          var name = 'None'
+        }
+        var word = document.getElementById('word').value;
+        if (word === undefined || word == null || word.length <= 0) {
+          var word = 'None'
+        }
+        var size = document.getElementById('size').value;
+        if (size === undefined || size == null || size.length <= 0) {
+          var size = 10 // taking care of this here? or in app.py
+        }
+        var color = document.getElementById('color').value;
+        if (color === undefined || color == null || color.length <= 0) {
+          var color = 'None'
+        }
+        var number = document.getElementById('number').value.replace(/_/g, '');
+        if (number === undefined || number == null || number.length <= 0) {
+          var number = 100000 // taking care of this here? or in app.py
+        }
+
+        window.open("/output/word_fractal/name=" + name + "/word=" + word + "/size=" + size + "/color=" + color + "/number=" + number);
+      }
+      </script>
+    <style>
+
+      * {
+        font-family: sans-serif;
+        font-size: 12pt;
+      }
+
+      h1 {
+        font-size: 35pt;
+      }
+      h2 {
+        font-size: 30pt;
+        margin: 15px 0px 15px;
+      }
+
+      .hide-overflow {
+        overflow: hidden;
+      }
+
+
+    </style>
+
+  </head>
+  <body>
+    <a href="\index"><span style="margin:10px; color:black;" class="glyphicon glyphicon-home"></span></a>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <h1 class="text-center">IFS Fractal Generator</h1>
+          <h1 class="text-center">--Word Fractal--</h1>
+
+          <strong>Name your fractal:</strong>
+          <input id='name' placeholder="MyFractal" style="width:100%" label="Name your Fractal:"></input><br><br>
+          <strong>Enter the word for your fractal:</strong>
+          <input id='word' placeholder="Fractal Word or Phrase" style="width:100%"></input><Br><br>
+            <strong>Enter the desired size of the fractal (default is 10):</strong>
+            <input id='size' placeholder="10" style="width:100%"></input><br><br>
+            <strong>Enter the desired color of the fractal as an (R, G, B) tuple (default is blue):</strong>
+            <input id='color' placeholder="(0, 0, 255)" style="width:100%"></input><br><br>
+            <strong>Enter the number of points to be ploted (default is 100,000):</strong>
+            <input id='number' placeholder="100_000" style="width:100%"></input><br><br>
+          <button class="btn btn-default" type="button" style="margin-bottom:40px;" onclick="getFractal()">Get Fractal</button>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </body>
+</html>

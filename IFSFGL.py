@@ -73,7 +73,9 @@ def choose_random_index(weights):
         sum = sum + weights[t]
     return min(t, len(weights)-1)
 
-
+@njit
+def make_eq_weights(n):
+    return np.array([1/n]*n)
 
 
 
@@ -148,11 +150,11 @@ class Fractal(object):
         self.transformations = transformations
         self.color = color
         if all(weights == np.array([0.])):
-            self.weights = np.array([1/len(transformations)]*len(transformations))
+            self.weights = make_eq_weights(len(transformations))
         else:
             if len(weights) != len(transformations):
                 raise ValueError('IFSFGL: Weights do not match the transformations.')
-            if sum(weights) != 1:
+            if sum(weights) - 1 > .00001:
                 raise ValueError('IFSFGL: Weights do not sum to 1.')
             self.weights = weights
 
