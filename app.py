@@ -13,13 +13,28 @@ app = Flask(__name__)
 if not os.path.exists("static/saved_fractals"):
     os.makedirs("static/saved_fractals")
 
+
 @app.route('/master_list')
 def master():
     pictureDictionary = {}
+    generatorLinkDictionary = {}
+    # try:
+    # find URLS for saved images
     for file in os.listdir('static/saved_fractals/'):
         if os.fsdecode(file).endswith('.png'):
             pictureDictionary[os.fsdecode(file)[:-4]] = url_for('static', filename= 'saved_fractals/' + os.fsdecode(file))
-    return render_template('master.html', pictureDictionary=pictureDictionary)
+
+    # read in link list
+    text = ''.join(line.strip() for line in open('static/saved_fractals/links.txt','r').readlines())
+    for line in re.split('!', text.strip()):
+        if r'<' in line:
+            both = re.split(r'<', line)
+            generatorLinkDictionary[both[0].strip()] = re.sub(' ', '', both[1].strip())
+
+    # except:
+    #     error = sys.exc_info()[1]
+    #     return render_template('error.html', error=error)
+    return render_template('master.html', pictureDictionary=pictureDictionary, generatorLinkDictionary=generatorLinkDictionary)
 
 
 @app.route('/')
@@ -70,12 +85,10 @@ def word(name, word, size, color, number):
         weights = make_eq_weights(len(transformations)) # take care of it here since we have to send to output.html
 
         #check size
-        if size == 0:
-            size=10
 
         # check color
-        if color=='None':
-            color = (0,0,255) # since we cannot feed Fractal an empty argument -- what the heck, we'll take care of it here :)
+        if color == 'None':
+            color = (0,0,255)
         else:
             color = eval(color)
 
@@ -83,11 +96,16 @@ def word(name, word, size, color, number):
         if number==0:
             number = 100_000
 
+
         opNormMess = check_transformations(transformations)
 
         myFractal = Fractal(transformations, weights=weights, size=size, color=color)
         myFractal.add_points(number)
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
+
+        with open('static/saved_fractals/links.txt', 'a') as links:
+            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/word_fractal/name={name[:-11]}/word={word}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
+
 
         length=len(transformations)
 
@@ -122,12 +140,10 @@ def output(name, transformations, weights, size, color, number):
             weights = np.array([eval(num) for num in re.split(',', weights)])
 
         #check size
-        if size == 0:
-            size=10
 
         # check color
-        if color=='None':
-            color = (0,0,255) # since we cannot feed Fractal an empty argument -- what the heck, we'll take care of it here :)
+        if color == 'None':
+            color = (0,0,255)
         else:
             color = eval(color)
 
@@ -141,6 +157,10 @@ def output(name, transformations, weights, size, color, number):
         myFractal.add_points(number)
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
+        with open('static/saved_fractals/links.txt', 'a') as links:
+            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={transformations}/weights={weights}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
+
+
         length=len(weights)
 
     except:
@@ -148,7 +168,6 @@ def output(name, transformations, weights, size, color, number):
         return render_template('error.html', error=error)
 
     return render_template('output.html', name=name, transformations=transformations, weights=weights, size=size, color=color, number=number, URL = url_for('static', filename='saved_fractals/' + name + '.png'), opNormMess=opNormMess, length=length)
-
 
 
 if __name__ == "__main__":
