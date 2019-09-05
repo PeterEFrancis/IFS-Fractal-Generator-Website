@@ -101,6 +101,7 @@ def word(name, word, size, color, number):
 
         myFractal = Fractal(transformations, weights=weights, size=size, color=color)
         myFractal.add_points(number)
+
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
         with open('static/saved_fractals/links.txt', 'a') as links:
