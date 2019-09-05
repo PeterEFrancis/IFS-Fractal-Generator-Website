@@ -61,21 +61,26 @@ Use the function `plot_figures(figuresToPlot, size, width , colour, path)` with 
 Optionally, define a 'weights' numpy array with the elements corresponding to the probability of selecting of each transformation in the list of transformations. Be sure that the elements of the weights array sum to one and is the same length as the list of transformations.
 > `WT = np.array([0.64,0.12,0.12,0.12])`
 
+If a function has a weights array as an input, and none is given, the default is an evenly distributed array with the same number of elements as the length of `transformations`. The function to create such an array is `make_eq_weights(n)`. For example,
+> `make_eq_weights(4)`
+
+returns `array([0.25, 0.25, 0.25, 0.25])`.
+
 ##### 1. Using the `Fractal` class
 
 Create an instance of the `Fractal` class for the list of transformations, and optionally the `weights`, `size`, and `color`. The default is for evenly distributed weights, `size = 10` and `color='blue'`.
 > `leafFractal = Fractal(T, weights=WT, size=10, color='green')`
 
-To add points to the fractal image, impliment `add_points(n)` with the `n` the number of points to be added. This does not save point coordinates once they have been plotted onto the image. (See **2. Pre-Plotting Calculation** for a method to save point coordinates).
+To add points to the fractal image, implement `add_points(n)` with the `n` the number of points to be added. This does not save point coordinates once they have been plotted onto the image. (See **2. Pre-Plotting Calculation** for a method to save point coordinates).
 > `leafFractal.add_points(500000)`
 
-Optionally, add points only in a specific frame by implimenting `add_points(n,frame)` with the `n` the number of points to be added and `frame=np.array([Xmin, Xmax, Ymin, Ymax])` a numpy array with the bounds of the frame.
+Optionally, add points only in a specific frame by implementing `add_points(n,frame)` with the `n` the number of points to be added and `frame=np.array([Xmin, Xmax, Ymin, Ymax])` a numpy array with the bounds of the frame.
 > `leafFractal.add_points(500000, np.array([.3, .7, .2, .4]))`
 
-To save the fractal image, impliment `save_pic(path)` with `path` the path of the image to be saved.
+To save the fractal image, implement `save_pic(path)` with `path` the path of the image to be saved.
 > `leafFractal.save_pic(../leafFractal.png)`
 
-To display a small scale of the fractal image, impliment `display_pic()`.
+To display a small scale of the fractal image, implement `display_pic()`.
 > `leafFractal.display_pic()`
 
 To access the current full-scale fractal image, call the `pic` attribute.
@@ -84,9 +89,9 @@ To access the current full-scale fractal image, call the `pic` attribute.
 To see the developement of the fractal (how many points have been plotted) call the `developement` attribute.
 > `leafFractal.developement`
 
-To calculate the fractal dimension, impliment `dimension(n, startSize, endSize, samples)` with `n` the number of points added, `startSize` the initial size and `endSize` the final size. The default values are `3_000_000`, `2`, and `100` respectively. Samples defaults to (the maximum number of) exponentially-spaced integers between `startSize` and `endSize` including `startSize + 1`. For more information on fractal dimmension see 3b1b video on fractals [here](https://www.youtube.com/watch?v=gB9n2gHsHN4).
+To calculate the fractal dimension, implement `dimension(n, startSize, endSize, samples)` with `n` the number of points added, `startSize` the initial size and `endSize` the final size. The default values are `3_000_000`, `2`, and `100` respectively. Samples defaults to (the maximum number of) exponentially-spaced integers between `startSize` and `endSize` including `startSize + 1`. For more information on fractal dimension see 3b1b video on fractals [here](https://www.youtube.com/watch?v=gB9n2gHsHN4).
 
-To return the number of dark pixels in the fractal image, impliment `dark_pixels()`.
+To return the number of dark pixels in the fractal image, implement `dark_pixels()`.
 > `leafFractal.dark_pixels()`
 
 ##### 2. Pre-Plotting Calculation

@@ -62,7 +62,7 @@ def word(name, word, size, color, number):
 
         # Check word
         if word == 'None':
-            raise ValueError('Web_Generator in app.py in word(): You must give the generator a word for your fractal.')
+            raise ValueError('app.py in word(): You must give the generator a word for your fractal.')
         else:
             transformations = word_fractal(word)
 
@@ -105,7 +105,7 @@ def output(name, transformations, weights, size, color, number):
     try:
         # Check Name
         if name == 'None':
-            raise ValueError('Web_Generator in app.py in output(): You must name your fractal.')
+            raise ValueError('app.py in output(): You must name your fractal.')
         else:
             name = name.replace(' ', '') + '_' + str(int(time.time()))
 
