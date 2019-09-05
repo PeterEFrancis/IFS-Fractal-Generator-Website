@@ -29,6 +29,10 @@
         font-size: 30pt;
         margin: 15px 0px 15px;
       }
+      h3 {
+        font-size: 20pt;
+        margin: 15px 0px 15px;
+      }
 
       .hide-overflow{
         overflow: hidden;
@@ -70,20 +74,38 @@
   </head>
   <body>
     <div class="container-fluid margin">
-      <div class="row">
+      <div class="row margin">
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
           <h1 class="text-center">IFS Fractal Generator</h1>
           <h3 class="text-center margin hl"><em class="hl">Make a cool-looking thing.</em></h3>
-          <button type="button" class="btn launch-generator center-block margin"
-                  onclick="window.open('/generator/full');">
-            <h2 class="text-center">Launch Full Generator</h2>
-          </button>
-          <button type="button" class="btn launch-generator center-block margin"
-                  onclick="window.open('/generator/word_fractal');">
-            <h2 class="text-center">Launch Word Fractal Generator</h2>
-          </button>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <div class="btn-group-vertical center-block">
+            <button type="button" class="btn launch-generator center-block"
+                    onclick="window.open('/generator/full');">
+              <h3 class="text-center">Full Generator</h3>
+            </button>
+            <button type="button" class="btn launch-generator center-block"
+                    onclick="window.open('/generator/word_fractal');">
+              <h3 class="text-center">Word Fractal Generator</h3>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
           <h2 class="hl">About the Generator</h2>
           <p style="margin-bottom: 40px;">This Iterated Funtion System Fractal Generator was first
             conceptualized during an undergraduate Linear Algebra couse while
