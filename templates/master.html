@@ -42,7 +42,7 @@
     {% for name in pictureDictionary %}
     <p><strong>{{ name[:-11] }}</strong> <a href={{ generatorLinkDictionary[name] }}>Generate</a> <a href={{ pictureDictionary[name] }}>View</a> <a href={{ pictureDictionary[name] }} download>Download</a><bR>
       Created: <script>document.write(timeConverter({{ name[-10:] }}))</script></p><br>
-    <img src={{ pictureDictionary[name] }} style="max-width:85%"/><br><br>
+    <img src={{ pictureDictionary[name] }} style="max-width:85%; max-height:400px;"/><br><br>
     <hr>
     {% endfor %}
   </body>

@@ -73,7 +73,7 @@ def word(name, word, size, color, number):
         if name == 'None':
             raise ValueError('Web_Generator in app.py output(): You must name your fractal.')
         else:
-            name = name.replace(' ', '') + '_' + str(int(time.time()))
+            name = name.strip().replace(' ', '_') + '_' + str(int(time.time()))
 
         # Check word
         if word == 'None':
@@ -126,13 +126,13 @@ def output(name, transformations, weights, size, color, number):
         if name == 'None':
             raise ValueError('app.py in output(): You must name your fractal.')
         else:
-            name = name.replace(' ', '') + '_' + str(int(time.time()))
+            name = name.strip().replace(' ', '_') + '_' + str(int(time.time()))
 
         # Check transformations
         if transformations == 'None': # leave error message for IFSFGL
             transformations = None
         else:
-            transformations = [eval(func.replace('&','@').replace('FS','/')) for func in re.split('>', transformations)]
+            transformations = [eval(func.replace(' ','').replace('\n','').replace('&','@').replace('FS','/')) for func in re.split('>', transformations)]
 
         # check weights
         if weights == 'None':
