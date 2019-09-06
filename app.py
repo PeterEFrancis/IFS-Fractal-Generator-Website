@@ -159,11 +159,11 @@ def output(name, transformations, weights, size, color, number):
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
         Ltransformations = ''
-        for func in transformations:
-            Ltransformations += '>np.' + func
+        for array in transformations:
+            Ltransformations += f'>np.{array}'
         Lweights = ''
         for weight in weights:
-            Lweights += ',' + weight
+            Lweights += f',{weight}'
         
         with open('static/saved_fractals/links.txt', 'a') as links:
             links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={Ltransformations[1:]}/weights={Lweights[1:]}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
