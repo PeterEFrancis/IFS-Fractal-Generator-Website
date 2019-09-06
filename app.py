@@ -160,10 +160,13 @@ def output(name, transformations, weights, size, color, number):
 
         Ltransformations = ''
         for func in transformations:
-            Ltransformations += '>' + func
+            Ltransformations += '>np.' + func
+        Lweights = ''
+        for weight in weights:
+            Lweights += ',' + weight
         
         with open('static/saved_fractals/links.txt', 'a') as links:
-            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={Ltransformations}/weights={Lweights}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
+            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={Ltransformations[1:]}/weights={Lweights[1:]}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
 
 
         length=len(weights)
