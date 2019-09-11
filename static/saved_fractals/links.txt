@@ -1,3 +1,0 @@
-test_1567719973 < /output/word_fractal/name=test/word=test/size=10/color=(0,0,255)/number=100000
- ! 
-

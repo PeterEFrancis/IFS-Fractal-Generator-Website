@@ -1,4 +1,4 @@
-from IFSGL import *
+from ifsFractals import *
 import random as rd
 
 

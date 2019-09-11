@@ -5,14 +5,15 @@ import html
 import os
 import sys
 
-from IFSFGL import *
+from ifsFractals import *
 # from RFG import *
 
 app = Flask(__name__)
 
 if not os.path.exists("static/saved_fractals"):
     os.makedirs("static/saved_fractals")
-
+f = open("static/saved_fractals/links.txt","a+")
+f.close()
 
 @app.route('/master_list')
 def master():
@@ -105,7 +106,7 @@ def word(name, word, size, color, number):
         myFractal.save_pic(f'static/saved_fractals/{name}.png')
 
         with open('static/saved_fractals/links.txt', 'a') as links:
-            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/word_fractal/name={name[:-11]}/word={word}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
+            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/word_fractal/name={name[:-11]}/word={word}/size={size}/color={color}/number={number}")) + '\n! \n\n')
 
 
         length=len(transformations)
@@ -160,13 +161,18 @@ def output(name, transformations, weights, size, color, number):
 
         Ltransformations = ''
         for array in transformations:
-            Ltransformations += f'>np.{array}'
-        Lweights = ''
-        for weight in weights:
-            Lweights += f',{weight}'
-        
+            Larray = ''
+            for row in array:
+                Lrow = ''
+                for el in row:
+                    Lrow += f'{el},'
+                Larray += f'[{Lrow[:-1]}],'
+            Ltransformations += f'np.array([{Larray[:-1]}])>'
+
+        Lweights = ''.join(f'{weight},' for weight in weights)[:-1]
+
         with open('static/saved_fractals/links.txt', 'a') as links:
-            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={Ltransformations[1:]}/weights={Lweights[1:]}/size={size}/color={color}/number={number}")) + '\n ! \n\n')
+            links.write(f'{name} < ' + re.sub('\n', '', re.sub(' ', '', f"/output/name={name[:-11]}/transformations={Ltransformations[:-1]}/weights={Lweights[1:]}/size={size}/color={color}/number={number}")) + '\n! \n\n')
 
 
         length=len(weights)

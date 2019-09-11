@@ -44,7 +44,7 @@
           var number = 100000 // taking care of this here? or in app.py
         }
 
-        window.open("/output/name=" + name + "/transformations=" + transformations + "/weights=" + weights + "/size=" + size + "/color=" + color + "/number=" + number);
+        window.open("/output/name=" + name + "/transformations=" + transformations.replace(/\s/g,'') + "/weights=" + weights + "/size=" + size + "/color=" + color + "/number=" + number);
       }
       </script>
     <style>
